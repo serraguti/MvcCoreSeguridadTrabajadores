@@ -21,6 +21,12 @@ namespace MvcCoreSeguridadTrabajadores.Filters
                 context.RouteData.Values["controller"].ToString();
             string action =
                 context.RouteData.Values["action"].ToString();
+            string id = "";
+            if (context.RouteData.Values.ContainsKey("id"))
+            {
+                id = context.RouteData.Values["id"].ToString();
+            }
+                
             ITempDataProvider provider =
                 context.HttpContext
                 .RequestServices.GetService(typeof(ITempDataProvider))
@@ -28,6 +34,7 @@ namespace MvcCoreSeguridadTrabajadores.Filters
             var TempData = provider.LoadTempData(context.HttpContext);
             TempData["controller"] = controller;
             TempData["action"] = action;
+            TempData["id"] = id;
             provider.SaveTempData(context.HttpContext, TempData);
 
             if (user.Identity.IsAuthenticated == false)

@@ -48,7 +48,9 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
                 string controller =
                     TempData["controller"].ToString();
                 string action = TempData["action"].ToString();
-                return RedirectToAction(action, controller);
+                string id = TempData["id"].ToString();
+                return RedirectToAction(action, controller
+                    , new { id=id });
             }
             else
             {
