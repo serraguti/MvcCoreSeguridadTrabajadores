@@ -41,6 +41,8 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
                     (new Claim(ClaimTypes.Name, doctor.Apellido));
                 identity.AddClaim
                     (new Claim(ClaimTypes.NameIdentifier, doctor.IdDoctor.ToString()));
+                identity.AddClaim
+                    (new Claim(ClaimTypes.Role, doctor.Especialidad));
                 ClaimsPrincipal user = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync
                     (CookieAuthenticationDefaults.AuthenticationScheme
@@ -64,6 +66,11 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ErrorAcceso()
+        {
+            return View();
         }
     }
 }

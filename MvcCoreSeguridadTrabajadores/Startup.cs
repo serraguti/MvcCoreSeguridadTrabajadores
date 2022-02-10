@@ -30,6 +30,15 @@ namespace MvcCoreSeguridadTrabajadores
         {
             services.AddDistributedMemoryCache();
             services.AddSession();
+            //VAMOS A CREAR UNA POLITICA DE ACCESO POR ROLES
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PermisosElevados"
+                    , policy =>
+                    policy.RequireRole("CARDIOLOGIA","DIAGNOSTICO"));
+            });
+
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme =

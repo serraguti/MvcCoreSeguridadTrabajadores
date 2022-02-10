@@ -23,7 +23,7 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
             return View(this.repo.GetEnfermos());
         }
 
-        [AuthorizeDoctores]
+        [AuthorizeDoctores(Policy = "PermisosElevados")]
         public IActionResult Delete(string id)
         {
             Enfermo enfermo = this.repo.FindEnfermo(id);
