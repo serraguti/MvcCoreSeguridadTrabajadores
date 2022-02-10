@@ -20,6 +20,12 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
             this.repo = repo;
         }
 
+        [AuthorizeDoctores(Policy = "AdminOnly")]
+        public IActionResult AdminDoctor()
+        {
+            return View();
+        }
+
         [AuthorizeDoctores]
         public IActionResult PerfilDoctor()
         {

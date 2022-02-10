@@ -43,6 +43,15 @@ namespace MvcCoreSeguridadTrabajadores.Controllers
                     (new Claim(ClaimTypes.NameIdentifier, doctor.IdDoctor.ToString()));
                 identity.AddClaim
                     (new Claim(ClaimTypes.Role, doctor.Especialidad));
+                identity.AddClaim
+                    (new Claim("Salario", doctor.Salario.ToString()));
+                //DOCTOR HOUSE TENDRA UN CLAIM DE ADMINISTRADOR
+                if (doctor.IdDoctor == 377)
+                {
+                    identity.AddClaim
+                        (new Claim("Administrador", "Todo me vale"));
+                }
+
                 ClaimsPrincipal user = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync
                     (CookieAuthenticationDefaults.AuthenticationScheme
